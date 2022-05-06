@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique:true
+
     },
     password: {
         type: String,
@@ -16,7 +16,8 @@ const userSchema = new Schema({
     avatar: {
         type: String
         // default:
-    }
+    },
+
 })
 
 const User = mongoose.model('User', userSchema)
