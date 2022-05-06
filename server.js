@@ -27,6 +27,10 @@ app.set("view engin", "ejs");
 app.set('views', path.join(__dirname, '/views'))
 
 
+
+// Load routers
+app.use('/', require('./server/routes/userRoutes.js'))
+
 app.use('*', (req, res) => {
     res.send('Nothing Found')
 })
