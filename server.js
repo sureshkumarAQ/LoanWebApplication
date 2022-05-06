@@ -5,6 +5,7 @@ const bodyparser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const path = require("path");
 
+const connectDB = require('./server/database/connection.js');
 
 const app = express();
 
@@ -15,6 +16,8 @@ const PORT = process.env.PORT||8080
 // Log request
 app.use(morgan('tiny'));
 
+// mongodb connection
+connectDB();
 
 // Parse request  to body parser
 app.use(bodyparser.urlencoded({extended:true}))
