@@ -13,7 +13,7 @@ dotenv.config({ path: '.env' });
 const PORT = process.env.PORT || 8080
 
 
-// Log request
+// Log request Using Morgan
 app.use(morgan('tiny'));
 
 
@@ -23,13 +23,18 @@ app.use(cookieParser());
 
 // set view engine
 app.set("view engin", "ejs");
+app.set('views', path.join(__dirname, '/views'))
+
 
 
 // Load routers
 app.use('/', require('./server/routes/userRoutes.js'))
 
+app.use('*', (req, res) => {
+    res.send('Nothing Found')
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 })
->>>>>>> c3ae748df29aaea0e532dc5475eac9748f0d4265
+
