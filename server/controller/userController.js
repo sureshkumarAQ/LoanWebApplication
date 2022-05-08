@@ -27,6 +27,10 @@ exports.Register= async(req,res)=>{
     const user = await new User({
         username:req.body.username,
         password:req.body.password,
+        ctc:req.body.ctc,
+        bankname:req.body.bankname,
+        accountnumber:req.body.accountnumber,
+        ifsc:req.body.ifsc
     })
 
      // zwt create a new tokken

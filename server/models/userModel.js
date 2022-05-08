@@ -14,6 +14,21 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    ctc:{
+        type:Number,
+        required:true
+    },
+
+    bankname:{
+        type:String
+    },
+    accountnumber:{
+        type:Number
+    },
+    ifsc:{
+        type:String
+    }
+
 })
 
 // Hash password usign mongoose hook
