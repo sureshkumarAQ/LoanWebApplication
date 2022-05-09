@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body{
+             word-wrap:break-word;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1> Loan Requests</h1>
+    </div>
+
+    
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <% for(var i=0;i<loans.length;i++) { %>
+
+        <div class="col-sm-6">
+            <div class="well">
+                <h4><span class="fa fa-user"></span> User Details</h4>
+                    <p>
+                        
+                        <strong>username</strong>: <%=loans[i].user.username %><br>
+                        
+                        <strong>lecs</strong>: <%=loans[i].user.lecs %><br>
+                        <strong>Max Loan Amount</strong>: <%=loans[i].user.maxLoanAmount %><br>
+                    </p>
+                    <div class="well">
+                        <h4><span class="fa fa-user"></span> Loan Details</h4>
+                            <p>
+                                <strong>Loan Amount</strong>: <%=loans[i].loanAmount %><br>
+                                <strong>Tenure</strong>: <%=loans[i].tenure %><br>
+                                <strong>Interest Rate</strong>: <%=loans[i].interestRate %><br>
+                            </p>
+                    </div>
+                    <button type="submit" class=" ">Accept</button>
+
+            </div>
+            
+        </div>
+        
+        <% } %>
+
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -31,6 +31,11 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
+//testing route
+app.get("/profile", (req, res) => {
+  res.render("home");
+});
+
 // Load routers
 app.use("/user", require("./server/routes/userRoutes.js"));
 app.use("/loan", require("./server/routes/loanRoutes.js"));
