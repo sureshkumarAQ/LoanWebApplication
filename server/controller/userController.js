@@ -23,6 +23,38 @@ exports.Register= async(req,res)=>{
         return;
     }
 
+
+    // Calculating initial loan eliginle criteria score(lecs)
+    let ageScore, ctcScore,loanScore;
+    if(req.body.age>75 || req.body.age<25)
+    {
+        ageScore = 0;
+    }
+    else
+    {
+        ageScore = 100-(req.body.age-25)*2;
+    }
+
+    if(req.body.ctc>5000000)
+    {
+        ctcScore = 100;
+    }
+    else if(req.body.ctc<300000)
+    {
+        ctcScore = 0;
+    }
+    else
+    {
+        ctcScore = (req.body.ctc-300000)*2/100000;
+    }
+
+    loanScore = 10;
+    const initialLECS = 300 + ageScore+ctcScore + loanScore;
+
+    // Calculating initial maximum loan eligible amount
+
+    const initialMaxLoan = (5000000/400)*(ageScore+ctcScore + loanScore);
+
     // Store all data in user object
     const user = await new User({
         username:req.body.username,
@@ -30,9 +62,11 @@ exports.Register= async(req,res)=>{
         ctc:req.body.ctc,
         bankname:req.body.bankname,
         accountnumber:req.body.accountnumber,
-        ifsc:req.body.ifsc
+        ifsc:req.body.ifsc,
+        age:req.body.age,
+        lecs:initialLECS,
+        maxLoanAmount:initialMaxLoan
     })
-
      // zwt create a new tokken
      const token =  jwt.sign({id:user._id},process.env.JWT_SECRET);
      //save user token

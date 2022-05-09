@@ -27,6 +27,23 @@ const userSchema = new Schema({
     },
     ifsc:{
         type:String
+    },
+    age:{
+        type:Number,
+        required:true
+    },
+    totalLaon:{
+        type:Number,
+        default:0
+    },
+    // loan eligible criteria score(lecs)
+    lecs:{
+        type:Number,
+        default:300
+    },
+    maxLoanAmount:{
+        type:Number,
+        default:0
     }
 
 })

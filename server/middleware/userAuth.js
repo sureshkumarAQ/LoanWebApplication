@@ -6,10 +6,10 @@ const config = process.env;
 
 const verifyToken = async(req, res, next) => {
   const token = req.headers.jwtoken;
-  if(!token)
-  {
-    token = req.cookies.jwtoken
-  }
+  // if(!token)
+  // {
+  //   token = req.cookies.jwtoken
+  // }
 
   if (!token) {
     return res.status(401).send("Login required");
