@@ -1,4 +1,3 @@
-
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -39,6 +38,7 @@ app.set('views', path.join(__dirname, '/views'))
 
 // Load routers
 app.use('/user',require('./server/routes/userRoutes.js'))
+app.use('/loan',require('./server/routes/loanRoutes.js'))
 
 
 app.listen(PORT, () => {

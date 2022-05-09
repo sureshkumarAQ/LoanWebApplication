@@ -2,16 +2,16 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const User = require('./userModel')
 
-const AskedLoanSchema = new Schema({
-    userLinked: {
-        type: Schema.Types.ObjectId, ref: 'User'
+const ApplyLoanSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId, ref: 'user'
     },
     loanAmount: {
         type: Number,
         required: true
     },
     tenure: {
-        type: Number,
+        type: String,
         require: true,
     },
     interestRate: {
@@ -21,11 +21,14 @@ const AskedLoanSchema = new Schema({
     acceptanace: {
         type: Boolean,
         default: false
+    },
+    usersWhoAccept:{
+        type: Schema.Types.ObjectId, ref: 'user'
     }
 
 })
 const ModifyLoanSchema = new Schema({
-    userLinked: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    userLinked: [{ type: Schema.Types.ObjectId, ref: 'user' }],
     modifyLoanAmount: {
         type: Number,
         required: true
@@ -44,6 +47,6 @@ const ModifyLoanSchema = new Schema({
     }
 })
 
-const Loan = mongoose.model('Loan', AskedLoanSchema)
+const ApplyLoan = mongoose.model('ApplyLoan', ApplyLoanSchema)
 const ModifyLoan = mongoose.model('ModifyLoan', ModifyLoanSchema)
-module.exports = { Loan, ModifyLoan }
+module.exports = { ApplyLoan, ModifyLoan }

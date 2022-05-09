@@ -2,7 +2,7 @@ const {User,PanCard,Aadhar,SalarySlip} = require('../models/userModel')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//Create and save new Driver
+//Create and save new user
 
 const fileSizeFormatter = (bytes, decimal) => {
     if(bytes === 0){
@@ -159,7 +159,6 @@ exports.uploadSalarySlips = async(req,res)=>{
         // console.log(req.file);
         await salaryslips.save(salaryslips).then(data=>{
         res.status(201).send(data)
-        // res.redirect('/user/login');
     })
     } catch (error) {
      res.status(400).send(error.message);
