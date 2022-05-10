@@ -45,6 +45,7 @@ route.post(
 );
 
 // GET APIS
+route.get("/logout", controller.userLogout);
 route.get("/profile", userAuth, getController.userProfile);
 route.get("/profilePhoto", userAuth, getController.userProfilePhoto);
 

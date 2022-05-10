@@ -196,8 +196,7 @@ exports.acceptModifiedLoanRequest = async (req, res) => {
         acceptanace: true,
       }
     ).exec();
-
-    res.status(200).send(loanUser);
+    res.redirect("/user/myProfile");
   } catch (err) {
     res.status(400).send(err);
   }

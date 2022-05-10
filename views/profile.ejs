@@ -64,7 +64,11 @@
     <div class="container">
         <div class="page-header text-center">
             <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-            <a href="/login" class="btn btn-default btn-sm">Logout</a>
+
+            <form action="/user/logout" method="get">
+              <button type="submit" class=" ">Logout</button>
+              
+          </form>
         </div>
         <div class="main-body">
         
@@ -144,6 +148,14 @@
     
             </div>
 
+            <form action="/user/uploadProfilePhoto" method="post">
+              <div class="form-group">
+                  <label>Upload/Update profile photo</label>
+                  <input type="file" class="form-control" name="profilePhoto">
+              </div>
+              <button type="submit" class="btn btn-sm">upload</button>
+          </form>
+
             <h2 clas="align-items-center"> Accepted Loan Requests</h2>
             <div class="row">
               <% for(var i=0;i<Responces[0].length;i++) { %>
@@ -175,36 +187,36 @@
 
             <h2 clas="align-items-center"> Modified Loan Requests</h2>
             <div class="row">
-        
-                <!-- LOCAL INFORMATION -->
+              <% for(var i=0;i<Responces[3].length;i++) { %>
+
                 <div class="col-sm-6">
-                    <div class="well">
-                        <h4><span class="fa fa-user"></span> User Details</h4>
-                            <p>
-                                <strong>id</strong>: sfds54fdsfdsf5s4f56fsd<br>
-                                <strong>email</strong>: suraj1503kain@gmail.com<br>
-                                <strong>password</strong>: 12345
-                            </p>
-                            <div class="well">
-                                <h4><span class="fa fa-user"></span> User Details</h4>
-                                    <p>
-                                        <strong>id</strong>: sfds54fdsfdsf5s4f56fsd<br>
-                                        <strong>email</strong>: suraj1503kain@gmail.com<br>
-                                        <strong>password</strong>: 12345
-                                    </p>
-                            </div>
-                            <form action="/loan/acceptLoan/" method="post">
-                                <button type="submit" class=" ">Accept</button>
-                                
-                            </form>
-                           
-                    </div>
+                  <div class="well">
+                    <h4><span class="fa fa-user"></span> Loan Details</h4>
+                    <p>
+                      <strong>Loan Amount</strong>: <%=Responces[3][i].modifyLoanAmount %><br>
+                      <strong>Tenure</strong>: <%=Responces[3][i].modifyTenure %><br>
+                      <strong>Interest Rate</strong>: <%=Responces[3][i].modifyInterestRate %><br>
+                    </p>
+                  <div class="well">
+                    <h4><span class="fa fa-user"></span> User who send modified loan request</h4>
+                    <p>
+                      <% /* %>
+                      <strong>Username</strong>: <%=Responces[3][i].modifier.username %><br>
+                      <strong>Lecs</strong>: <%=Responces[3][i].modifier.lecs %><br>
+                      <strong>Max Loan Amount</strong>: <%=Responces[3][i].modifier.maxLoanAmount %><br>
+                      <% */ %>
+                    </p>
+                  </div>
+                  <form action="/loan/acceptModifiedLoan/<%=Responces[3][i]._id %>" method="post">
+                    <button type="submit" class=" ">Accept</button>
+                    
+                </form>
+                 </div>
                 </div>
-        
                 
+                <% } %>                
             </div>
-
-
+            <% /* %>
             <h2 clas="align-items-center"> Modified Accepted Loans</h2>
             <div class="row">
         
@@ -236,6 +248,7 @@
                 </div>
         
             </div>
+            <% */ %>
         </div>
 </div>
 </body>

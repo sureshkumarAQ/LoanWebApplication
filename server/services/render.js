@@ -59,6 +59,7 @@ exports.userProfile = (req, res) => {
   let one = "http://localhost:3000/loan/acceptedLoan";
   let two = "http://localhost:3000/user/profile";
   let three = "http://localhost:3000/user/profilePhoto";
+  let four = "http://localhost:3000/loan/modifiedLoan";
 
   const requestOne = axios.get(one, {
     headers: {
@@ -78,17 +79,29 @@ exports.userProfile = (req, res) => {
       "Content-Type": "application/json",
     },
   });
+  const requestFour = axios.get(four, {
+    headers: {
+      jwtoken: token,
+      "Content-Type": "application/json",
+    },
+  });
 
   axios
-    .all([requestOne, requestTwo, requestThree])
+    .all([requestOne, requestTwo, requestThree, requestFour])
     .then(
       axios.spread((...responses) => {
         const responseOne = responses[0].data;
         const responseTwo = responses[1].data;
-        const requestThree = responses[2].data;
+        const responseThree = responses[2].data;
+        const responseFour = responses[3].data;
         // use/access the results
-        // console.log(responseOne, responseTwo);
-        const Responces = [responseOne, responseTwo, requestThree];
+        // console.log(responseFour);
+        const Responces = [
+          responseOne,
+          responseTwo,
+          responseThree,
+          responseFour,
+        ];
         // console.log(Responces);
         res.render("profile", { Responces: Responces });
       })

@@ -168,10 +168,10 @@ exports.uploadProfilePhoto = async (req, res) => {
       profilePhoto: req.file,
       user: userID,
     });
-    // console.log(req.file);
+    console.log(req.file);
     await photo.save(photo).then((data) => {
-      res.status(201).send(data);
-      // res.redirect('/user/login');
+      // res.status(201).send(data);
+      res.redirect("/user/myProfile");
     });
   } catch (error) {
     res.status(400).send(error.message);
@@ -219,5 +219,14 @@ exports.uploadSalarySlips = async (req, res) => {
     });
   } catch (error) {
     res.status(400).send(error.message);
+  }
+};
+exports.userLogout = async (req, res) => {
+  try {
+    res.clearCookie("jwtoken");
+    // res.status(200).send("Log out Successufully!")
+    res.redirect("/user/login");
+  } catch (error) {
+    res.status(500).send(error);
   }
 };

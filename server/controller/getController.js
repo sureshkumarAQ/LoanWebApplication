@@ -69,11 +69,15 @@ exports.userProfile = async (req, res) => {
 exports.userProfilePhoto = async (req, res) => {
   try {
     const userID = req.user._id;
-    const file = await userPhoto.findOne({ user: userID });
-    // console.log(file);
-    const filename = file.profilePhoto.filename;
-    // console.log(filename);
+    const files = await userPhoto.find({ user: userID });
 
+    let filename = "Avatar-Transparent.png";
+    for (var i = 0; i < files.length; i++) {
+      if (files[i].profilePhoto) {
+        filename = files[i].profilePhoto.filename;
+        break;
+      }
+    }
     res.status(201).send(filename);
   } catch (error) {
     res.status(500).send(error.message);
@@ -88,6 +92,10 @@ exports.acceptedLoanRequest = async (req, res) => {
       user: userID,
       acceptanace: true,
     }).populate("usersWhoAccept", ["username", "lecs", "maxLoanAmount"]);
+
+    if (!loans) {
+      res.status(500).send("No loan request accepted");
+    }
 
     // console.log(loans);
     res.status(201).send(loans);
@@ -104,6 +112,9 @@ exports.modifiedLoanRequest = async (req, res) => {
       acceptanace: false,
     }).populate("modifier", ["username", "lecs", "maxLoanAmount"]);
 
+    if (!loans) {
+      res.status(500).send("No modified loan request");
+    }
     res.status(201).send(loans);
   } catch (error) {
     res.status(500).send(error);
