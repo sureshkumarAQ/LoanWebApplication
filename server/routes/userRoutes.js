@@ -10,7 +10,7 @@ const route = express.Router();
 // Services
 route.get("/login", services.userLogin);
 route.get("/register", services.userSignup);
-route.get("/apply", services.userLoanApply);
+route.get("/applyForLoan", services.userLoanApply);
 
 //APIs
 

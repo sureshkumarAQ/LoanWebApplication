@@ -1,22 +1,18 @@
 const jwt = require("jsonwebtoken");
-var {User} = require('../models/userModel');
-const cookieParser = require('cookie-parser');
+var { User } = require("../models/userModel");
+const cookieParser = require("cookie-parser");
 
 const config = process.env;
 
-const verifyToken = async(req, res, next) => {
-  const token = req.headers.jwtoken;
-  // if(!token)
-  // {
-  //   token = req.cookies.jwtoken
-  // }
+const verifyToken = async (req, res, next) => {
+  const token = req.headers.jwtoken || req.cookies.jwtoken;
 
   if (!token) {
     return res.status(401).send("Login required");
-  } 
+  }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET);
-    
+
     const user = await User.findById(decoded.id);
     if (!user) {
       return next(new ErrorResponse("No user found with this id", 404));
@@ -31,4 +27,3 @@ const verifyToken = async(req, res, next) => {
 };
 
 module.exports = verifyToken;
-

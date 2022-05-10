@@ -16,6 +16,7 @@ route.post(
 
 // Get APIs
 route.get("/loans", getController.homePage);
+route.get("/loan/:loanID", getController.getLoanByID);
 
 route.get("/acceptedLoan", userAuth, getController.acceptedLoanRequest);
 
@@ -29,5 +30,6 @@ route.get(
 
 // Services
 route.get("/loanRequests", services.loanList);
+route.get("/modifyLoan/:loanID", services.modifyLoan);
 
 module.exports = route;

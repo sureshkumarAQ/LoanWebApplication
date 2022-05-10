@@ -15,7 +15,7 @@
 
     <div class="page-header text-center">
         <h1> Loan Requests</h1>
-        <a href="/user/apply" class="btn btn-primary btn-default btn-md">Apply for Loan</a>
+        <a href="/user/applyForLoan" class="btn btn-primary btn-default btn-md">Apply for Loan</a>
 
     </div>
 
@@ -43,9 +43,14 @@
                                 <strong>Interest Rate</strong>: <%=loans[i].interestRate %><br>
                             </p>
                     </div>
+                    <form action="/loan/acceptLoan/<%=loans[i]._id %>" method="post">
                     <button type="submit" class=" ">Accept</button>
+                    
+                </form>
+                <br/>
+                <form action="/loan/modifyLoan/<%=loans[i]._id %>" method="get">
                     <button type="submit" class=" ">Modify</button>
-
+            </form>
 
             </div>
             

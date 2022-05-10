@@ -4,7 +4,29 @@ const { User } = require("../models/userModel");
 exports.homePage = async (req, res) => {
   try {
     await ApplyLoan.find({ acceptanace: false })
-      .select("-_id -__v")
+      .select("-__v")
+      .populate("user", ["username", "lecs", "maxLoanAmount"])
+      .then((loan) => {
+        res.status(200).send(loan);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message ||
+            "Some error occurred while creating a create operation",
+        });
+      });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.getLoanByID = async (req, res) => {
+  try {
+    const loanID = req.params.loanID;
+    console.log(loanID);
+    await ApplyLoan.findById(loanID)
+      .select("-__v")
       .populate("user", ["username", "lecs", "maxLoanAmount"])
       .then((loan) => {
         res.status(200).send(loan);

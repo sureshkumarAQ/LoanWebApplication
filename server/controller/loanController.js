@@ -26,8 +26,8 @@ exports.applyNewLoan = async (req, res) => {
       });
       // console.log(loan);
       await loan.save(loan).then((data) => {
-        res.status(201).send(data);
-        // res.redirect('/user/login');
+        // res.status(201).send(data);
+        res.redirect("/loan/loanRequests");
       });
     }
   } catch (error) {
@@ -90,7 +90,7 @@ exports.acceptLoan = async (req, res) => {
         maxLoanAmount: updatedMaxLoanAmount,
       }
     ).exec();
-    console.log(loanUser);
+    // console.log(loanUser);
     await ApplyLoan.findOneAndUpdate(
       {
         _id: loanID,
@@ -101,7 +101,8 @@ exports.acceptLoan = async (req, res) => {
       }
     ).exec();
 
-    res.status(200).send(loanUser);
+    // res.status(200).send(loanUser);
+    res.redirect("/loan/loanRequests");
   } catch (err) {
     res.status(400).send(err);
   }

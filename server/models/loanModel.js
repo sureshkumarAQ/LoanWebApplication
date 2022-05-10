@@ -34,15 +34,12 @@ const ModifyLoanSchema = new Schema({
 
   modifyLoanAmount: {
     type: Number,
-    required: true,
   },
   modifyTenure: {
     type: String,
-    require: true,
   },
   modifyInterestRate: {
     type: Number,
-    require: true,
   },
   acceptanace: {
     type: Boolean,
