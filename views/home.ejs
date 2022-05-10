@@ -15,6 +15,8 @@
 
     <div class="page-header text-center">
         <h1> Loan Requests</h1>
+        <a href="/user/apply" class="btn btn-primary btn-default btn-md">Apply for Loan</a>
+
     </div>
 
     
@@ -28,9 +30,9 @@
                 <h4><span class="fa fa-user"></span> User Details</h4>
                     <p>
                         
-                        <strong>username</strong>: <%=loans[i].user.username %><br>
+                        <strong>Username</strong>: <%=loans[i].user.username %><br>
                         
-                        <strong>lecs</strong>: <%=loans[i].user.lecs %><br>
+                        <strong>Lecs</strong>: <%=loans[i].user.lecs %><br>
                         <strong>Max Loan Amount</strong>: <%=loans[i].user.maxLoanAmount %><br>
                     </p>
                     <div class="well">
@@ -42,6 +44,8 @@
                             </p>
                     </div>
                     <button type="submit" class=" ">Accept</button>
+                    <button type="submit" class=" ">Modify</button>
+
 
             </div>
             
