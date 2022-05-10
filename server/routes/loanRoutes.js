@@ -19,6 +19,14 @@ route.get("/loans", getController.homePage);
 
 route.get("/acceptedLoan", userAuth, getController.acceptedLoanRequest);
 
+route.get("/modifiedLoan", userAuth, getController.modifiedLoanRequest);
+
+route.get(
+  "/modifiedAcceptedLoan",
+  userAuth,
+  getController.modifiedAcceptedLoanRequest
+);
+
 // Services
 route.get("/loanRequests", services.loanList);
 

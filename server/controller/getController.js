@@ -52,3 +52,30 @@ exports.acceptedLoanRequest = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.modifiedLoanRequest = async (req, res) => {
+  try {
+    const userID = req.user._id;
+    const loans = await ModifyLoan.find({
+      user: userID,
+      acceptanace: false,
+    }).populate("modifier", ["username", "lecs", "maxLoanAmount"]);
+
+    res.status(201).send(loans);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+exports.modifiedAcceptedLoanRequest = async (req, res) => {
+  try {
+    const userID = req.user._id;
+    const loans = await ModifyLoan.find({
+      modifier: userID,
+      acceptanace: true,
+    }).populate("user", ["username", "lecs", "maxLoanAmount"]);
+
+    res.status(201).send(loans);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};

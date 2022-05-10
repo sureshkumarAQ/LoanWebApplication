@@ -112,9 +112,13 @@ exports.modifyLoanRequest = async (req, res) => {
     const userID = req.user._id;
     const loanID = req.params.loanID;
 
+    const loan = await ApplyLoan.findById(loanID);
+
+    const loanUserID = loan.user;
+
     const modifiedLoan = await new ModifyLoan({
       modifier: userID,
-      loan: loanID,
+      user: loanUserID,
       modifyLoanAmount: req.body.modifyLoanAmount,
       modifyTenure: req.body.modifyTenure,
       modifyInterestRate: req.body.modifyInterestRate,
