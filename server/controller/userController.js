@@ -134,7 +134,6 @@ exports.Login = async (req,res)=>{
     }
 }
 
-
 exports.uploadAdhar= async(req,res)=>{
     try {
  
@@ -152,7 +151,7 @@ exports.uploadAdhar= async(req,res)=>{
     } catch (error) {
      res.status(400).send(error.message);
     }
- }
+}
 
 exports.uploadProfilePhoto= async(req,res)=>{
    try {
