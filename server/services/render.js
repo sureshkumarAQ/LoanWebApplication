@@ -6,7 +6,7 @@ exports.loanList = (req, res) => {
   axios
     .get("http://localhost:3000/loan/loans")
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data);
       res.render("home.ejs", { loans: response.data });
     })
     .catch((err) => {

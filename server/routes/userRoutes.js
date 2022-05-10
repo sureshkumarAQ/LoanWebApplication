@@ -10,6 +10,7 @@ const route = express.Router();
 route.post('/register',controller.Register);
 route.post('/login',controller.Login);
 
+route.post('/uploadProfilePhoto',userAuth,upload.single('profilePhoto'),controller.uploadProfilePhoto);
 route.post('/uploadAadhar',userAuth,upload.single('Aadhar'),controller.uploadAdhar);
 route.post('/uploadPan',userAuth,upload.single('panCard'),controller.uploadPan);
 route.post('/uploadSalarySlips',userAuth,upload.array('SalarySlips'),controller.uploadSalarySlips);

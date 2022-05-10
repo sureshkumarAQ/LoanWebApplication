@@ -57,12 +57,23 @@ userSchema.pre('save', async function (next) {
 })
 
 
+const profilePhotoSchema = new Schema({
+    profilePhoto: {
+        type: Object
+    },
+    user: { type: Schema.Types.ObjectId, ref: 'user' },
+});
+
+
+
 const aadharSchema = new Schema({
     aadhar: {
         type: Object
     },
     user: { type: Schema.Types.ObjectId, ref: 'user' },
 }, { timestamps: true });
+
+
 
 const panSchema = new Schema({
 
@@ -73,6 +84,8 @@ const panSchema = new Schema({
 
 }, { timestamps: true });
 
+
+
 const salarySlipSchema = new Schema({
 
     slips: [Object],
@@ -82,7 +95,8 @@ const salarySlipSchema = new Schema({
 }, { timestamps: true });
 
 const User = mongoose.model('user', userSchema)
+const profilePhoto = mongoose.model('profilePhoto', profilePhotoSchema)
 const Aadhar = mongoose.model('aadhar', aadharSchema)
 const PanCard = mongoose.model('pancard', panSchema)
 const SalarySlip = mongoose.model('salaryslip', salarySlipSchema)
-module.exports = { User, Aadhar, PanCard, SalarySlip }
+module.exports = { User,profilePhoto, Aadhar, PanCard, SalarySlip }

@@ -28,13 +28,14 @@ const ApplyLoanSchema = new Schema({
 
 })
 const ModifyLoanSchema = new Schema({
-    userLinked: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    modifier: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    loan:[{type: Schema.Types.ObjectId, ref: 'ApplyLoan' }],
     modifyLoanAmount: {
         type: Number,
         required: true
     },
     modifyTenure: {
-        type: Number,
+        type: String,
         require: true,
     },
     modifyInterestRate: {

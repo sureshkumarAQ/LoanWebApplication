@@ -1,4 +1,4 @@
-const {User,PanCard,Aadhar,SalarySlip} = require('../models/userModel')
+const {User,PanCard,profilePhoto,Aadhar,SalarySlip} = require('../models/userModel')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -136,15 +136,34 @@ exports.Login = async (req,res)=>{
 
 
 exports.uploadAdhar= async(req,res)=>{
+    try {
+ 
+     const userID = req.user._id;
+     const aadhar = await new Aadhar({
+         aadhar:req.file,
+         user:userID,
+     })
+     // console.log(req.file);
+     await aadhar.save(aadhar).then(data=>{
+         res.status(201).send(data)
+         // res.redirect('/user/login');
+     })
+       
+    } catch (error) {
+     res.status(400).send(error.message);
+    }
+ }
+
+exports.uploadProfilePhoto= async(req,res)=>{
    try {
 
     const userID = req.user._id;
-    const aadhar = await new Aadhar({
-        aadhar:req.file,
+    const photo = await new profilePhoto({
+        profilePhoto:req.file,
         user:userID,
     })
     // console.log(req.file);
-    await aadhar.save(aadhar).then(data=>{
+    await photo.save(photo).then(data=>{
         res.status(201).send(data)
         // res.redirect('/user/login');
     })
