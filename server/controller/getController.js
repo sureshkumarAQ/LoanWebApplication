@@ -44,20 +44,22 @@ exports.getLoanByID = async (req, res) => {
 };
 
 exports.userProfile = async (req, res) => {
-  try {
-    const userID = req.user._id;
-    const user = await User.findById(userID).select("-_id -password -__v");
+  // try {
+  //   const userID = req.user._id;
+  //   const user = await User.findById(userID).select("-_id -password -__v");
 
-    if (!user) {
-      res
-        .status(400)
-        .send("Your Profile not found please create account first");
-    }
+  //   if (!user) {
+  //     res
+  //       .status(400)
+  //       .send("Your Profile not found please create account first");
+  //   }
 
-    res.status(201).send(user);
-  } catch (error) {
-    res.status(500).send(error);
-  }
+  //   res.status(201).send(user);
+
+  // } catch (error) {
+  //   res.status(500).send(error);
+  // }
+  res.render("profile");
 };
 
 exports.acceptedLoanRequest = async (req, res) => {

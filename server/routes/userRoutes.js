@@ -43,6 +43,6 @@ route.post(
 );
 
 // GET APIS
-route.get("/myProfile", userAuth, getController.userProfile);
+route.get("/myProfile", getController.userProfile);
 
 module.exports = route;
