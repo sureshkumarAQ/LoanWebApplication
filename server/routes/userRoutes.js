@@ -1,8 +1,8 @@
 const express = require("express");
-const controller = require('../controller/userController.js')
-const getController = require('../controller/getController.js')
-const userAuth = require('../middleware/userAuth')
-const {upload} = require('../middleware/upload')
+const controller = require("../controller/userController.js");
+const getController = require("../controller/getController.js");
+const userAuth = require("../middleware/userAuth");
+const { upload } = require("../middleware/upload");
 const services = require("../services/render");
 
 const route = express.Router();
@@ -42,9 +42,7 @@ route.post(
   controller.uploadSalarySlips
 );
 
-
-
 // GET APIS
-route.get('/myProfile',userAuth,getController.userProfile)
+route.get("/myProfile", userAuth, getController.userProfile);
 
 module.exports = route;

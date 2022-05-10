@@ -86,8 +86,6 @@ exports.Register = async (req, res) => {
 
 // Login user
 exports.Login = async (req,res)=>{
-
-
     //get user data
     try {
 
