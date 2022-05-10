@@ -24,7 +24,7 @@ exports.userLoanApply = (req, res) => {
 
 exports.modifyLoan = (req, res) => {
   const loanID = req.params.loanID;
-  console.log(loanID);
+  // console.log(loanID);
 
   axios
     .get(`http://localhost:3000/loan/loan/${loanID}`)
