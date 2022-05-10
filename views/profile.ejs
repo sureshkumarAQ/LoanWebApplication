@@ -73,9 +73,9 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <img src="../uploads/<%=Responces[2]%>" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
-                          <h4>John Doe</h4>
+                          <h4><%= Responces[1].username %></h4>
                         </div>
                       </div>
                     </div>
@@ -90,7 +90,7 @@
                           <h6 class="mb-0">Bank Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          State Bank of India
+                          <%= Responces[1].bankname %>
                         </div>
                       </div>
                   <div class="row">
@@ -98,7 +98,7 @@
                           <h6 class="mb-0">Account Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          3654879165546
+                          <%= Responces[1].accountnumber %>
                         </div>
                       </div>
                       <div class="row">
@@ -106,7 +106,7 @@
                           <h6 class="mb-0">IFSC Code</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          SBIN0011445
+                          <%= Responces[1].ifsc %>
                         </div>
                       </div>
                       <div class="row">
@@ -114,7 +114,7 @@
                           <h6 class="mb-0">CTC</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            ₹30000000
+                            ₹<%= Responces[1].ctc %>
                         </div>
                       </div>
                       <div class="row">
@@ -122,7 +122,7 @@
                           <h6 class="mb-0">LECS</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                         400
+                          <%= Responces[1].lecs %>
                         </div>
                       </div>
                       <div class="row">
@@ -130,7 +130,7 @@
                           <h6 class="mb-0">Maximum Loan Amount</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            ₹10000000
+                            ₹<%= Responces[1].maxLoanAmount %>
                         </div>
                       </div>
                       
@@ -143,31 +143,36 @@
               </div>
     
             </div>
+
             <h2 clas="align-items-center"> Accepted Loan Requests</h2>
             <div class="row">
-        
-                <!-- LOCAL INFORMATION -->
+              <% for(var i=0;i<Responces[0].length;i++) { %>
+
                 <div class="col-sm-6">
-                    <div class="well">
-                        <h4><span class="fa fa-user"></span> User Details</h4>
-                            <p>
-                                <strong>id</strong>: sfds54fdsfdsf5s4f56fsd<br>
-                                <strong>email</strong>: suraj1503kain@gmail.com<br>
-                                <strong>password</strong>: 12345
-                            </p>
-                            <div class="well">
-                                <h4><span class="fa fa-user"></span> User Details</h4>
-                                    <p>
-                                        <strong>id</strong>: sfds54fdsfdsf5s4f56fsd<br>
-                                        <strong>email</strong>: suraj1503kain@gmail.com<br>
-                                        <strong>password</strong>: 12345
-                                    </p>
-                            </div>
-                    </div>
+                  <div class="well">
+                    <h4><span class="fa fa-user"></span> Loan Details</h4>
+                    <p>
+                      <strong>Loan Amount</strong>: <%=Responces[0][i].loanAmount %><br>
+                      <strong>Tenure</strong>: <%=Responces[0][i].tenure %><br>
+                      <strong>Interest Rate</strong>: <%=Responces[0][i].interestRate %><br>
+                    </p>
+                  <div class="well">
+                    <h4><span class="fa fa-user"></span> User who accept your loan request</h4>
+                    <p>
+                      <% /* %>
+                      <strong>Username</strong>: <%=Responces[0][i].userWhoAccept.username %><br>
+                      <strong>Lecs</strong>: <%=Responces[0][i].userWhoAccept.lecs %><br>
+                      <strong>Max Loan Amount</strong>: <%=Responces[0][i].userWhoAccept.maxLoanAmount %><br>
+                      <% */ %>
+                    </p>
+                  </div>
+                 </div>
                 </div>
-        
                 
+                <% } %>                
             </div>
+
+
             <h2 clas="align-items-center"> Modified Loan Requests</h2>
             <div class="row">
         
@@ -198,6 +203,8 @@
         
                 
             </div>
+
+
             <h2 clas="align-items-center"> Modified Accepted Loans</h2>
             <div class="row">
         

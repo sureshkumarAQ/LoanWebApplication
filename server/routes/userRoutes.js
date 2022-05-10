@@ -12,6 +12,8 @@ route.get("/login", services.userLogin);
 route.get("/register", services.userSignup);
 route.get("/applyForLoan", services.userLoanApply);
 
+route.get("/myProfile", services.userProfile);
+
 //APIs
 
 route.post("/register", controller.Register);
@@ -43,6 +45,7 @@ route.post(
 );
 
 // GET APIS
-route.get("/myProfile", getController.userProfile);
+route.get("/profile", userAuth, getController.userProfile);
+route.get("/profilePhoto", userAuth, getController.userProfilePhoto);
 
 module.exports = route;

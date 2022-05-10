@@ -91,8 +91,8 @@ const salarySlipSchema = new Schema(
 );
 
 const User = mongoose.model("user", userSchema);
-const profilePhoto = mongoose.model("profilePhoto", profilePhotoSchema);
+const userPhoto = mongoose.model("userPhoto", profilePhotoSchema);
 const Aadhar = mongoose.model("aadhar", aadharSchema);
 const PanCard = mongoose.model("pancard", panSchema);
 const SalarySlip = mongoose.model("salaryslip", salarySlipSchema);
-module.exports = { User, profilePhoto, Aadhar, PanCard, SalarySlip };
+module.exports = { User, userPhoto, Aadhar, PanCard, SalarySlip };

@@ -1,7 +1,7 @@
 const {
   User,
   PanCard,
-  profilePhoto,
+  userPhoto,
   Aadhar,
   SalarySlip,
 } = require("../models/userModel");
@@ -85,71 +85,64 @@ exports.Register = async (req, res) => {
 };
 
 // Login user
-exports.Login = async (req,res)=>{
-    //get user data
-    try {
-
-        //Validate request
-        if(!req.body)
-        {
-            res.status(400).send({message:"Fill email and password"});
-            return;
-        }
-
-        const username = req.body.username;
-        const password = req.body.password;
-
-        if(!username || !password)
-           return res.status(406).send({err:"Not all field have been entered"});
-
-        // Check if user is already exist or not
-        const user = await User.findOne({username});
-        if(!user)
-        {
-            return res.status(406).send({err:"No account with this email"});
-        }
-        // Compare password
-        const isMatch = await bcrypt.compare(password,user.password);
-        if(!isMatch)
-           return res.status(406).send({err:"Invalid Credentials"});
- 
-        // zwt create a new tokken
-       const token =  jwt.sign({id:user._id},process.env.JWT_SECRET);
-       //save user token
-       user.token = token;
-
-       //Store jwt-token in cookie
-       res.cookie("jwtoken",token,{
-           expires:new Date(Date.now()+10*24*60*60*1000),
-           httpOnly:true
-       })
-
-        // res.send({token});
-        res.redirect("/loan/loanRequests");
-        
-    } catch (err) {
-        res.status(500).send("Error while Login")
+exports.Login = async (req, res) => {
+  //get user data
+  try {
+    //Validate request
+    if (!req.body) {
+      res.status(400).send({ message: "Fill email and password" });
+      return;
     }
-}
 
-exports.uploadAdhar= async(req,res)=>{
-    try {
- 
-     const userID = req.user._id;
-     const aadhar = await new Aadhar({
-         aadhar:req.file,
-         user:userID,
-     })
-     // console.log(req.file);
-     await aadhar.save(aadhar).then(data=>{
-         res.status(201).send(data)
-         // res.redirect('/user/login');
-     })
-       
-    } catch (error) {
-     res.status(400).send(error.message);
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if (!username || !password)
+      return res.status(406).send({ err: "Not all field have been entered" });
+
+    // Check if user is already exist or not
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(406).send({ err: "No account with this email" });
     }
-}
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(406).send({ err: "Invalid Credentials" });
+
+    // zwt create a new tokken
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    //save user token
+    user.token = token;
+
+    //Store jwt-token in cookie
+    res.cookie("jwtoken", token, {
+      expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
+
+    // res.send({token});
+    res.redirect("/loan/loanRequests");
+  } catch (err) {
+    res.status(500).send("Error while Login");
+  }
+};
+
+exports.uploadAdhar = async (req, res) => {
+  try {
+    const userID = req.user._id;
+    const aadhar = await new Aadhar({
+      aadhar: req.file,
+      user: userID,
+    });
+    // console.log(req.file);
+    await aadhar.save(aadhar).then((data) => {
+      res.status(201).send(data);
+      // res.redirect('/user/login');
+    });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
 exports.uploadAdhar = async (req, res) => {
   try {
@@ -171,7 +164,7 @@ exports.uploadAdhar = async (req, res) => {
 exports.uploadProfilePhoto = async (req, res) => {
   try {
     const userID = req.user._id;
-    const photo = await new profilePhoto({
+    const photo = await new userPhoto({
       profilePhoto: req.file,
       user: userID,
     });
@@ -202,29 +195,29 @@ exports.uploadPan = async (req, res) => {
 };
 
 exports.uploadSalarySlips = async (req, res) => {
-    try {
-      const userID = req.user._id;
-  
-      let slipsArray = [];
-      req.files.forEach((element) => {
-        const slip = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          fileSize: fileSizeFormatter(element.size, 2),
-        };
-        slipsArray.push(slip);
-      });
-  
-      const salaryslips = await new SalarySlip({
-        slips: slipsArray,
-        user: userID,
-      });
-      // console.log(req.file);
-      await salaryslips.save(salaryslips).then((data) => {
-        res.status(201).send(data);
-      });
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
+  try {
+    const userID = req.user._id;
+
+    let slipsArray = [];
+    req.files.forEach((element) => {
+      const slip = {
+        fileName: element.originalname,
+        filePath: element.path,
+        fileType: element.mimetype,
+        fileSize: fileSizeFormatter(element.size, 2),
+      };
+      slipsArray.push(slip);
+    });
+
+    const salaryslips = await new SalarySlip({
+      slips: slipsArray,
+      user: userID,
+    });
+    // console.log(req.file);
+    await salaryslips.save(salaryslips).then((data) => {
+      res.status(201).send(data);
+    });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 };

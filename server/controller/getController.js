@@ -1,5 +1,11 @@
 const { ApplyLoan, ModifyLoan } = require("../models/loanModel");
-const { User } = require("../models/userModel");
+const {
+  User,
+  userPhoto,
+  Aadhar,
+  PanCard,
+  SalarySlip,
+} = require("../models/userModel");
 
 exports.homePage = async (req, res) => {
   try {
@@ -44,22 +50,34 @@ exports.getLoanByID = async (req, res) => {
 };
 
 exports.userProfile = async (req, res) => {
-  // try {
-  //   const userID = req.user._id;
-  //   const user = await User.findById(userID).select("-_id -password -__v");
+  try {
+    const userID = req.user._id;
+    const user = await User.findById(userID).select("-_id -password -__v");
 
-  //   if (!user) {
-  //     res
-  //       .status(400)
-  //       .send("Your Profile not found please create account first");
-  //   }
+    if (!user) {
+      res
+        .status(400)
+        .send("Your Profile not found please create account first");
+    }
+    // console.log(user);
+    res.status(201).send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-  //   res.status(201).send(user);
+exports.userProfilePhoto = async (req, res) => {
+  try {
+    const userID = req.user._id;
+    const file = await userPhoto.findOne({ user: userID });
+    // console.log(file);
+    const filename = file.profilePhoto.filename;
+    // console.log(filename);
 
-  // } catch (error) {
-  //   res.status(500).send(error);
-  // }
-  res.render("profile");
+    res.status(201).send(filename);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 exports.acceptedLoanRequest = async (req, res) => {
@@ -69,8 +87,9 @@ exports.acceptedLoanRequest = async (req, res) => {
     const loans = await ApplyLoan.find({
       user: userID,
       acceptanace: true,
-    }).populate("user", ["username", "lecs", "maxLoanAmount"]);
+    }).populate("usersWhoAccept", ["username", "lecs", "maxLoanAmount"]);
 
+    // console.log(loans);
     res.status(201).send(loans);
   } catch (error) {
     res.status(500).send(error);
