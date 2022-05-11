@@ -1,11 +1,13 @@
 const axios = require("axios");
 const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+const PORT = process.env.PORT || 8080;
 
 const userAuth = require("../middleware/userAuth");
 exports.loanList = (req, res) => {
   // Make a get request to loans
   axios
-    .get("http://localhost:3000/loan/loans")
+    .get(`http://localhost:${PORT}/loan/loans`)
     .then(function (response) {
       // console.log(response.data);
       res.render("home", { loans: response.data });
@@ -29,7 +31,7 @@ exports.modifyLoan = (req, res) => {
   // console.log(loanID);
 
   axios
-    .get(`http://localhost:3000/loan/loan/${loanID}`)
+    .get(`http://localhost:${PORT}/loan/loan/${loanID}`)
     .then(function (response) {
       // console.log(response.data);
       res.render("modifyLoan", { loan: response.data });
@@ -56,10 +58,10 @@ exports.userProfile = (req, res) => {
   //     res.send(err);
   //   });
 
-  let one = "http://localhost:3000/loan/acceptedLoan";
-  let two = "http://localhost:3000/user/profile";
-  let three = "http://localhost:3000/user/profilePhoto";
-  let four = "http://localhost:3000/loan/modifiedLoan";
+  let one = `http://localhost:${PORT}/loan/acceptedLoan`;
+  let two = `http://localhost:${PORT}/user/profile`;
+  let three = `http://localhost:${PORT}/user/profilePhoto`;
+  let four = `http://localhost:${PORT}/loan/modifiedLoan`;
 
   const requestOne = axios.get(one, {
     headers: {
