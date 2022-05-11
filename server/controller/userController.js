@@ -164,11 +164,16 @@ exports.uploadAdhar = async (req, res) => {
 exports.uploadProfilePhoto = async (req, res) => {
   try {
     const userID = req.user._id;
+    console.log(`Your file is :${req.file}`);
+    if (req.file === undefined) {
+      // res.status(501).send("Your file is not uploaded");
+      res.redirect("/user/myProfile");
+    }
     const photo = await new userPhoto({
       profilePhoto: req.file,
       user: userID,
     });
-    console.log(req.file);
+
     await photo.save(photo).then((data) => {
       // res.status(201).send(data);
       res.redirect("/user/myProfile");

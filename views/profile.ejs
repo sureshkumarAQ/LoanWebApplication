@@ -148,13 +148,32 @@
     
             </div>
 
-            <form action="/user/uploadProfilePhoto" method="post">
+            <form action="/user/uploadProfilePhoto" method="POST">
+
               <div class="form-group">
                   <label>Upload/Update profile photo</label>
-                  <input type="file" class="form-control" name="profilePhoto">
+                  <input type="file" class="form-control" name="profilePhoto" placeholder="Upload your profile photo">
               </div>
               <button type="submit" class="btn btn-sm">upload</button>
           </form>
+
+          <form action="/user/uploadAadhar" method="POST">
+              
+            <div class="form-group">
+                <label>Upload Aadhar Card photo</label>
+                <input type="file" class="form-control" name="Aadhar" >
+            </div>
+            <button type="submit" class="btn btn-sm">upload</button>
+        </form>
+
+        <form action="/user/uploadPan" method="POST">
+              
+          <div class="form-group">
+              <label>Upload Pan Card photo</label>
+              <input type="file" class="form-control" name="panCard" >
+          </div>
+          <button type="submit" class="btn btn-sm">upload</button>
+      </form>
 
             <h2 clas="align-items-center"> Accepted Loan Requests</h2>
             <div class="row">

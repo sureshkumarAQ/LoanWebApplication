@@ -1,6 +1,8 @@
 const { ApplyLoan, ModifyLoan } = require("../models/loanModel");
 const { User } = require("../models/userModel");
 
+const PORT = process.env.PORT || 8080;
+
 exports.applyNewLoan = async (req, res) => {
   try {
     const userID = req.user._id;
@@ -126,7 +128,11 @@ exports.modifyLoanRequest = async (req, res) => {
     });
     // console.log(modifiedLoan);
     await modifiedLoan.save(modifiedLoan).then((data) => {
-      res.status(201).send(data);
+      res
+        .status(201)
+        .send(
+          `"Modified loan request send successfully !! Redirect to home page http://localhost:${PORT}/loan/loanRequests}`
+        );
       // res.redirect('/user/login');
     });
   } catch (err) {
