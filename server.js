@@ -32,11 +32,10 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 // Load routers
+
 app.use("/user", require("./server/routes/userRoutes.js"));
 app.use("/loan", require("./server/routes/loanRoutes.js"));
 
 app.listen(PORT, () => {
-  console.log(
-    `Server is running on http://localhost:${PORT}/loan/loanRequests`
-  );
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
