@@ -8,7 +8,7 @@ const verifyToken = async (req, res, next) => {
   const token = req.headers.jwtoken || req.cookies.jwtoken;
 
   if (!token) {
-    return res.status(401).send("Login required");
+    return res.status(401).send("Pleas login to access this route!!");
   }
   try {
     const decoded = jwt.verify(token, config.JWT_SECRET);

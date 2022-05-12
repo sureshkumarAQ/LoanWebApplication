@@ -104,7 +104,7 @@ exports.acceptLoan = async (req, res) => {
     ).exec();
 
     // res.status(200).send(loanUser);
-    res.redirect("/loan/loanRequests");
+    res.redirect("/user/myProfile");
   } catch (err) {
     res.status(400).send(err);
   }
