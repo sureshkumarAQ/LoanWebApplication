@@ -12,7 +12,7 @@ route.get("/login", services.userLogin);
 route.get("/register", services.userSignup);
 route.get("/applyForLoan", services.userLoanApply);
 
-route.get("/myProfile", services.userProfile);
+route.get("/myProfile", userAuth, services.userProfile);
 
 //APIs
 
