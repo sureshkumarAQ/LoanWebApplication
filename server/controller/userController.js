@@ -134,26 +134,9 @@ exports.uploadAdhar = async (req, res) => {
       aadhar: req.file,
       user: userID,
     });
-    // console.log(req.file);
+    console.log(req.file);
     await aadhar.save(aadhar).then((data) => {
-      res.status(201).send(data);
-      // res.redirect('/user/login');
-    });
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
-exports.uploadAdhar = async (req, res) => {
-  try {
-    const userID = req.user._id;
-    const aadhar = await new Aadhar({
-      aadhar: req.file,
-      user: userID,
-    });
-    // console.log(req.file);
-    await aadhar.save(aadhar).then((data) => {
-      res.status(201).send(data);
+      res.status(201).send("Your Aadhar Card uploaded successfully!!");
       // res.redirect('/user/login');
     });
   } catch (error) {
@@ -164,11 +147,7 @@ exports.uploadAdhar = async (req, res) => {
 exports.uploadProfilePhoto = async (req, res) => {
   try {
     const userID = req.user._id;
-    console.log(`Your file is :${req.file}`);
-    // if (req.file === undefined) {
-    //   // res.status(501).send("Your file is not uploaded");
-    //   res.redirect("/user/myProfile");
-    // }
+    // console.log(`Your file is :${req.file}`);
     const photo = await new userPhoto({
       profilePhoto: req.file,
       user: userID,
@@ -191,7 +170,8 @@ exports.uploadPan = async (req, res) => {
     });
     // console.log(req.file);
     await pancard.save(pancard).then((data) => {
-      res.status(201).send(data);
+      // res.status(201).send(data);
+      res.status(201).send("Your Pan Card uploaded successfully!!");
       // res.redirect('/user/login');
     });
   } catch (error) {

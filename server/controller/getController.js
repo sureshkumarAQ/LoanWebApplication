@@ -75,7 +75,6 @@ exports.userProfilePhoto = async (req, res) => {
     for (var i = 0; i < files.length; i++) {
       if (files[i].profilePhoto) {
         filename = files[i].profilePhoto.filename;
-        break;
       }
     }
     res.status(201).send(filename);

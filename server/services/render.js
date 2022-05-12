@@ -3,7 +3,6 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const PORT = process.env.PORT || 8080;
 
-const userAuth = require("../middleware/userAuth");
 exports.loanList = (req, res) => {
   // Make a get request to loans
   axios

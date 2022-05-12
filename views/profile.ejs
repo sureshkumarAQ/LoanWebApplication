@@ -148,29 +148,30 @@
     
             </div>
 
-            <form action="/user/uploadProfilePhoto", method="POST">
+          <form action="/user/uploadProfilePhoto" enctype="multipart/form-data" method="POST">
 
               <div class="form-group">
                   <label>Upload/Update profile photo</label>
-                  <input type="file" class="form-control" name="profilePhoto" placeholder="Upload your profile photo">
+                  <input type="file" class="form-control" name="profilePhoto" placeholder="Upload your profile photo" required>
               </div>
               <button type="submit" class="btn btn-sm">upload</button>
           </form>
 
-          <form action="/user/uploadAadhar" method="POST">
+          
+          <form action="/user/uploadAadhar"enctype="multipart/form-data"  method="POST">
               
             <div class="form-group">
                 <label>Upload Aadhar Card photo</label>
-                <input type="file" class="form-control" name="Aadhar" >
+                <input type="file" class="form-control" name="Aadhar" required>
             </div>
             <button type="submit" class="btn btn-sm">upload</button>
         </form>
 
-        <form action="/user/uploadPan" method="POST">
+        <form action="/user/uploadPan" enctype="multipart/form-data" method="POST">
               
           <div class="form-group">
               <label>Upload Pan Card photo</label>
-              <input type="file" class="form-control" name="panCard" >
+              <input type="file" class="form-control" name="panCard" required>
           </div>
           <button type="submit" class="btn btn-sm">upload</button>
       </form>
