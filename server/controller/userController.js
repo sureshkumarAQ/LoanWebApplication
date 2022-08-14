@@ -7,7 +7,7 @@ const {
 } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+JWT_SECRET = "2175ajhv%^*&bkjkjb%#^jhvHvv"
 //Create and save new user
 
 const fileSizeFormatter = (bytes, decimal) => {
@@ -28,6 +28,7 @@ exports.Register = async (req, res) => {
     res.status(400).send({ message: "Content can not be empty" });
     return;
   }
+  console.log(req.body)
 
   // Calculating initial loan eliginle criteria score(lecs)
   let ageScore, ctcScore, loanScore;
@@ -65,7 +66,7 @@ exports.Register = async (req, res) => {
     maxLoanAmount: initialMaxLoan,
   });
   // zwt create a new tokken
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: user._id }, JWT_SECRET);
   //save user token
   user.token = token;
 
@@ -73,8 +74,8 @@ exports.Register = async (req, res) => {
   await user
     .save(user)
     .then((data) => {
-      // res.status(201).send(data)
-      res.redirect("/user/login");
+      res.status(201).send(data)
+      // res.redirect("/user/login");
     })
     .catch((err) => {
       res.status(500).send({
@@ -110,7 +111,7 @@ exports.Login = async (req, res) => {
     if (!isMatch) return res.status(406).send({ err: "Invalid Credentials" });
 
     // zwt create a new tokken
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, JWT_SECRET);
     //save user token
     user.token = token;
 
@@ -120,8 +121,8 @@ exports.Login = async (req, res) => {
       httpOnly: true,
     });
 
-    // res.send({token});
-    res.redirect("/loan/loanRequests");
+    res.send({token});
+    // res.redirect("/loan/loanRequests");
   } catch (err) {
     res.status(500).send("Error while Login");
   }

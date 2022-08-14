@@ -6,7 +6,8 @@ const connectDB = async ()=>{
     try {
         
         // monodb connection string
-        const con = await mongoose.connect(process.env.MONGO_URI,{
+        let str="mongodb+srv://surelosk:surelosk@cluster0.zhq89.mongodb.net/?retryWrites=true&w=majority"
+        const con = await mongoose.connect(str,{
              // These are for removing unwanted errors
              useNewUrlParser:true,
              useUnifiedTopology:true
